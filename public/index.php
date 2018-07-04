@@ -23,6 +23,8 @@ define('LARAVEL_START', microtime(true));
 
 require __DIR__.'/../vendor/autoload.php';
 
+require __DIR__.'/../fatura/lib/FaturaSimples.php';
+
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights
