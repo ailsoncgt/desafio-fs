@@ -30,20 +30,23 @@
 					<table class="table table-striped">
 					  	<thead>
 					    	<tr>
-							    <th scope="col">Número</th>
+							    <th scope="col">Venda</th>
 							    <th scope="col">Cliente</th>
 							    <th scope="col">Valor</th>
 							    <th scope="col">Data vencimento</th>
+							    <th scope="col">Link do boleto</th>
 							    <th scope="col">Status</th>
 					    	</tr>
 					  	</thead>
 					  	<tbody>
 					  		@foreach($list->data as $data)
 						    	<tr>
-						      		<th scope="row">numero</th>
+						      		<th scope="row">{{ $data->id }}</th>
 						      		<td>{{ $data->cliente->nome }}</td>
 						      		<td>R$ {{ $data->valor_venda }}</td>
 						      		<td>{{ $data->data_vencimento }}</td>
+						      		<td>
+						      			<a href="" target="_blank">link</a></td>
 						      		<td><span class="badge badge-warning text-white">pendente</span></td>
 						    	</tr>
 					    	@endforeach

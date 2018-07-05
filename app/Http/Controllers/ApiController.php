@@ -8,9 +8,22 @@ use FaturaSimples_Venda;
 
 class ApiController extends Controller
 {
-    public function index(){
+	public function __construct(Request $request)
+    {
+       FaturaSimples::configure("https://exemplo.faturasimples.com.br", "akYWFw2SaFMfTSvvJ4gYAziN/KY");
+    }
 
-    	FaturaSimples::configure("https://exemplo.faturasimples.com.br", "akYWFw2SaFMfTSvvJ4gYAziN/KY");
+    public function index(){
+    	
+    	$venda = FaturaSimples_Venda::listar();
+    	$data = json_decode($venda);
+		var_dump($data->data);
+
+    	return view('index', ['list' => $data]);
+    }
+
+    public function new(Request $request){
+    	
 		$dados = array(
 		    "data" => "2018-07-05",
 		    "cliente" => "ERAMO SOFTWARE",
@@ -29,10 +42,7 @@ class ApiController extends Controller
 		);
 
 		$new = FaturaSimples_Venda::criar($dados);
-		$venda = FaturaSimples_Venda::listar();
-		$data = (object) json_decode($venda);
-		var_dump(json_decode($new));
 
-    	return view('index', ['list' => json_decode($venda)]);
+    	return view('index');
     }
 }
