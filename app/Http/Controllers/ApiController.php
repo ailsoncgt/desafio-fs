@@ -10,16 +10,16 @@ class ApiController extends Controller
 {
     public function index(){
 
-    	FaturaSimples::configure("https://ailson.faturasimples.com.br", "bE03cppte2yyy3nGYIxhGAJaDww");
+    	FaturaSimples::configure("https://exemplo.faturasimples.com.br", "akYWFw2SaFMfTSvvJ4gYAziN/KY");
 		$dados = array(
-		    "data" => "2014-09-10",
+		    "data" => "2018-07-05",
 		    "cliente" => "ERAMO SOFTWARE",
 		    "cliente_cnpj" => "17737572000150",
 		    "servico" => "Desenvolvimento de Sistema",
-		    "discriminacao" => "Desenvolvimento do sistema Fatura Simples%0ADurante o Período de 01/09/2014 a 30/09/2015",
-		    "valor_venda" => 1313.22,
+		    "discriminacao" => "Desenvolvimento do sistema Fatura Simples",
+		    "valor_venda" => 100,
 		    "emissao_nfse" => FaturaSimples_Venda::EMISSAO_NFSE_EMITIR_AGORA,
-		    "meio_pagamento" => "Depósito",
+		    "meio_pagamento" => "Boleto Itaú",
 		    "nfse_municipio_emissao" => 2611606,
 		    "nfse_item_servico" => 103,
 		    "nfse_codigo_tributacao_municipio" => 6311900,
@@ -28,9 +28,10 @@ class ApiController extends Controller
 		    "nfse_incentivador_cultural" => FaturaSimples_Venda::NAO
 		);
 
+		$new = FaturaSimples_Venda::criar($dados);
 		$venda = FaturaSimples_Venda::listar();
 		$data = (object) json_decode($venda);
-		// var_dump($data);
+		var_dump(json_decode($new));
 
     	return view('index', ['list' => json_decode($venda)]);
     }
